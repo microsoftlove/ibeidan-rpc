@@ -2,12 +2,46 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <artifactId>ibeidan-rpc</artifactId>
+        <groupId>com.ibeidan</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.ibeidan</groupId>
     <artifactId>ibeidan-rpc-netty</artifactId>
-    <version>1.0-SNAPSHOT</version>
 
+
+    <dependencies>
+        <!-- rpc-api接口服务 -->
+        <dependency>
+            <groupId>com.ibeidan</groupId>
+            <artifactId>ibeidan-rpc-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!--日志记录器-->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+        <!--Compile Java code in memory using Java 7 compiler API-->
+        <dependency>
+            <groupId>com.itranswarp</groupId>
+            <artifactId>compiler</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+        </dependency>
+
+
+
+    </dependencies>
 
 
 
