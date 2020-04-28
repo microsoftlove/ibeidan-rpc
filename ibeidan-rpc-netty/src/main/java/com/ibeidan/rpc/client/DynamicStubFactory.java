@@ -2,6 +2,8 @@ package com.ibeidan.rpc.client;
 
 import com.ibeidan.rpc.transport.Transport;
 import com.itranswarp.compiler.JavaStringCompiler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import java.util.Map;
  */
 public class DynamicStubFactory implements StubFactory{
 
+    private static final Logger logger = LoggerFactory.getLogger(DynamicStubFactory.class);
 
     private final static String STUB_SOURCE_TEMPLATE =
             "package com.ibeidan.rpc.client.stubs;\n" +
@@ -18,14 +21,12 @@ public class DynamicStubFactory implements StubFactory{
                     "\n"+
                     "public class %s extends AbstractStub implements %s {\n" +
                     "   public String %s(String arg) {\n" +
-                    "       return SerializeSupport.parse(\n" +
-                    "                invokeRemote(\n" +
-                    "                new RpcRequest(\n"+
-                    "                    \"%s\",\n" +
-                    "                    \"%s\",\n" +
-                    "                    SerializeSupport.serialize(arg))));\n"+
-                    "}\n"+
+                    "        RpcRequest rpcRequest = new RpcRequest(\"%s\",\"%s\",SerializeSupport.serialize(arg));\n" +
+                    "        byte[] bytes = super.invokeRemote(rpcRequest);\n" +
+                    "        return SerializeSupport.parse(bytes);\n"+
+                    "   }\n"+
                     "}";
+
 
 
     public <T> T createStub(Transport transport,Class<T> serviceClass){
@@ -36,6 +37,8 @@ public class DynamicStubFactory implements StubFactory{
             String stubFullName = "com.ibeidan.rpc.client.stubs."+stubSimpleName;
             String methodName = serviceClass.getMethods()[0].getName();
             String source = String.format(STUB_SOURCE_TEMPLATE,stubSimpleName,classFullName,methodName,classFullName,methodName);
+
+            logger.info("proxy source:\n{}",source);
 
             //编译源代码
             JavaStringCompiler compiler = new JavaStringCompiler();
