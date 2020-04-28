@@ -14,10 +14,10 @@ public class ResponseFuture {
     private final CompletableFuture<Command> future;
     private final long timestamp;
 
-    public ResponseFuture(int requestId, CompletableFuture<Command> future, long timestamp) {
+    public ResponseFuture(int requestId, CompletableFuture<Command> future) {
         this.requestId = requestId;
         this.future = future;
-        this.timestamp = timestamp;
+        this.timestamp = System.nanoTime();
     }
 
     public int getRequestId() {

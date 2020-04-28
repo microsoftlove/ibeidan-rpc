@@ -38,7 +38,7 @@ public class RpcRequestSerializer implements Serializer<RpcRequest> {
     public RpcRequest deserialize(byte[] bytes, int offset, int length) {
         ByteBuffer buffer = ByteBuffer.wrap(bytes,offset,length);
         int len = buffer.getInt();
-        byte [] tmpBytes =new byte[len];
+        byte [] tmpBytes = new byte[len];
         buffer.get(tmpBytes);
         String interfaceName = new String(tmpBytes,StandardCharsets.UTF_8);
 

@@ -1,0 +1,3 @@
+com.ibeidan.rpc.serialize.impl.MetadataSerializer
+com.ibeidan.rpc.serialize.impl.RpcRequestSerializer
+com.ibeidan.rpc.serialize.impl.Stringserializer

@@ -45,6 +45,7 @@ public interface RpcAccessPoint extends Closeable {
         for (NameService nameService:nameServices) {
             if (nameService.supportedSchemes().contains(nameserviceUri.getScheme())){
                 nameService.connect(nameserviceUri);
+                return nameService;
             }
         }
         return null;

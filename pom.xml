@@ -11,6 +11,9 @@
     <modules>
         <module>ibeidan-rpc-netty</module>
         <module>ibeidan-rpc-api</module>
+        <module>ibeidan-rpc-server</module>
+        <module>ibeidan-rpc-client</module>
+        <module>hello-service-api</module>
     </modules>
 
     <packaging>pom</packaging>
